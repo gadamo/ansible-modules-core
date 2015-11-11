@@ -282,8 +282,12 @@ class SysctlModule(object):
             line = line.strip()
             self.file_lines.append(line)
 
-            # don't split empty lines or comments
-            if not line or line.startswith("#"):
+            # strip comments from lines
+            line = line.split('#',1)[0]
+            line = line.rstrip()
+
+            # don't split empty lines
+            if not line:
                 continue 
 
             k, v = line.split('=',1)
